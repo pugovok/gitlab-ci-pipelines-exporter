@@ -51,8 +51,8 @@ var (
 		},
 		[]string{"project", "ref"},
 	)
-	runCount = prometheus.NewCounterVec(
-		prometheus.CounterOpts{
+	runCount = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
 			Name: "gitlab_ci_pipeline_run_count",
 			Help: "GitLab CI pipeline run count",
 		},
@@ -119,7 +119,8 @@ func main() {
 
 			for {
 				pipelines, _, _ := gc.Pipelines.ListProjectPipelines(gp.ID, &gitlab.ListProjectPipelinesOptions{Ref: gitlab.String(p.Ref)})
-				if lastPipeline == nil || lastPipeline.ID != pipelines[0].ID || lastPipeline.Status != pipelines[0].Status {
+				if len(pipelines) > 0 &&
+					(lastPipeline == nil || lastPipeline.ID != pipelines[0].ID || lastPipeline.Status != pipelines[0].Status) {
 					if lastPipeline != nil {
 						runCount.WithLabelValues(p.Name, p.Ref).Inc()
 					}
