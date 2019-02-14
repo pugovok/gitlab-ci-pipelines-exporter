@@ -123,17 +123,20 @@ func main() {
 					if lastPipeline != nil {
 						runCount.WithLabelValues(p.Name, p.Ref).Inc()
 					}
-					if len(pipelines) > 0 {
-						lastPipeline, _, _ = gc.Pipelines.GetPipeline(gp.ID, pipelines[0].ID)
 
-						lastRunDuration.WithLabelValues(p.Name, p.Ref).Set(float64(lastPipeline.Duration))
+					if len(pipelines) == 0 {
+						continue
+					}
 
-						for _, s := range []string{"success", "failed", "running"} {
-							if s == lastPipeline.Status {
-								status.WithLabelValues(p.Name, p.Ref, s).Set(1)
-							} else {
-								status.WithLabelValues(p.Name, p.Ref, s).Set(0)
-							}
+					lastPipeline, _, _ = gc.Pipelines.GetPipeline(gp.ID, pipelines[0].ID)
+
+					lastRunDuration.WithLabelValues(p.Name, p.Ref).Set(float64(lastPipeline.Duration))
+
+					for _, s := range []string{"success", "failed", "running"} {
+						if s == lastPipeline.Status {
+							status.WithLabelValues(p.Name, p.Ref, s).Set(1)
+						} else {
+							status.WithLabelValues(p.Name, p.Ref, s).Set(0)
 						}
 					}
 				}
