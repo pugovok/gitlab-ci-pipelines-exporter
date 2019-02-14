@@ -4,7 +4,7 @@
 
 FROM golang:1.10 as builder
 
-WORKDIR /go/src/github.com/mvisonneau/gitlab-ci-pipelines-exporter
+WORKDIR /go/src/github.com/pugovok/gitlab-ci-pipelines-exporter
 
 COPY Makefile .
 RUN \
@@ -25,7 +25,7 @@ WORKDIR /usr/local/bin
 
 RUN apk add --no-cache ca-certificates && update-ca-certificates
 
-COPY --from=builder /go/src/github.com/mvisonneau/gitlab-ci-pipelines-exporter/gitlab-ci-pipelines-exporter /usr/local/bin
+COPY --from=builder /go/src/github.com/pugovok/gitlab-ci-pipelines-exporter/gitlab-ci-pipelines-exporter /usr/local/bin
 
 EXPOSE 80/tcp
 ENTRYPOINT ["/usr/local/bin/gitlab-ci-pipelines-exporter"]

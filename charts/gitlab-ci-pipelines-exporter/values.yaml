@@ -3,7 +3,7 @@ replicas: 1
 deploymentStrategy: RollingUpdate
 
 image:
-  repository: mvisonneau/gitlab-ci-pipelines-exporter
+  repository: pugovok/gitlab-ci-pipelines-exporter
   tag: latest
   pullPolicy: IfNotPresent
 

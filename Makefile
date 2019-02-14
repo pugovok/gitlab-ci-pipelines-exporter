@@ -2,7 +2,7 @@ NAME          := gitlab-ci-pipelines-exporter
 VERSION       := $(shell git describe --tags --abbrev=1)
 FILES         := $(shell git ls-files '*.go')
 LDFLAGS       := -w -extldflags "-static" -X 'main.version=$(VERSION)'
-REGISTRY      := mvisonneau/$(NAME)
+REGISTRY      := pugovok/$(NAME)
 .DEFAULT_GOAL := help
 
 .PHONY: setup
@@ -44,7 +44,7 @@ build-docker:
 
 .PHONY: publish-github
 publish-github: ## Send the binaries onto the GitHub release
-	ghr -u mvisonneau -replace $(VERSION) dist
+	ghr -u pugovok -replace $(VERSION) dist
 
 .PHONY: deps
 deps: ## Fetch all dependencies
@@ -66,8 +66,8 @@ coverage: ## Generates coverage report
 .PHONY: dev-env
 dev-env: ## Build a local development environment using Docker
 	@docker run -it --rm \
-		-v $(shell pwd):/go/src/github.com/mvisonneau/$(NAME) \
-		-w /go/src/github.com/mvisonneau/$(NAME) \
+		-v $(shell pwd):/go/src/github.com/pugovok/$(NAME) \
+		-w /go/src/github.com/pugovok/$(NAME) \
 		-p 8080:80 \
 		golang:1.10 \
 		/bin/bash -c 'make setup; make deps; make install; bash'

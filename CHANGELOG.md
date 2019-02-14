@@ -22,5 +22,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - LICENSE
 - README
 
-[Unreleased]: https://github.com/mvisonneau/gitlab-ci-pipelines-exporter/compare/0.1.0...HEAD
-[0.1.0]: https://github.com/mvisonneau/gitlab-ci-pipelines-exporter/tree/0.1.0
+[Unreleased]: https://github.com/pugovok/gitlab-ci-pipelines-exporter/compare/0.1.0...HEAD
+[0.1.0]: https://github.com/pugovok/gitlab-ci-pipelines-exporter/tree/0.1.0

@@ -1,10 +1,10 @@
-# mvisonneau/gitlab-ci-pipelines-exporter
+# pugovok/gitlab-ci-pipelines-exporter
 
-[![GoDoc](https://godoc.org/github.com/mvisonneau/gitlab-ci-pipelines-exporter?status.svg)](https://godoc.org/github.com/mvisonneau/gitlab-ci-pipelines-exporter/app)
-[![Go Report Card](https://goreportcard.com/badge/github.com/mvisonneau/gitlab-ci-pipelines-exporter)](https://goreportcard.com/report/github.com/mvisonneau/gitlab-ci-pipelines-exporter)
-[![Docker Pulls](https://img.shields.io/docker/pulls/mvisonneau/gitlab-ci-pipelines-exporter.svg)](https://hub.docker.com/r/mvisonneau/gitlab-ci-pipelines-exporter/)
-[![Build Status](https://travis-ci.org/mvisonneau/gitlab-ci-pipelines-exporter.svg?branch=master)](https://travis-ci.org/mvisonneau/gitlab-ci-pipelines-exporter)
-[![Coverage Status](https://coveralls.io/repos/github/mvisonneau/gitlab-ci-pipelines-exporter/badge.svg?branch=master)](https://coveralls.io/github/mvisonneau/gitlab-ci-pipelines-exporter?branch=master)
+[![GoDoc](https://godoc.org/github.com/pugovok/gitlab-ci-pipelines-exporter?status.svg)](https://godoc.org/github.com/pugovok/gitlab-ci-pipelines-exporter/app)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pugovok/gitlab-ci-pipelines-exporter)](https://goreportcard.com/report/github.com/pugovok/gitlab-ci-pipelines-exporter)
+[![Docker Pulls](https://img.shields.io/docker/pulls/pugovok/gitlab-ci-pipelines-exporter.svg)](https://hub.docker.com/r/pugovok/gitlab-ci-pipelines-exporter/)
+[![Build Status](https://travis-ci.org/pugovok/gitlab-ci-pipelines-exporter.svg?branch=master)](https://travis-ci.org/pugovok/gitlab-ci-pipelines-exporter)
+[![Coverage Status](https://coveralls.io/repos/github/pugovok/gitlab-ci-pipelines-exporter/badge.svg?branch=master)](https://coveralls.io/github/pugovok/gitlab-ci-pipelines-exporter?branch=master)
 
 `gitlab-ci-pipelines-exporter` is a very small binary that allows you to monitor your [GitLab CI pipelines](https://docs.gitlab.com/ee/ci/pipelines.html) with [Prometheus](https://prometheus.io/) or any monitoring solution supporting the [OpenMetrics](https://github.com/OpenObservability/OpenMetrics) format.
 
@@ -35,7 +35,7 @@ EOF
    --name gitlab-ci-pipelines-exporter \
    -v $(pwd)/config.yml:/etc/config.yml \
    -p 8080:80 \
-   mvisonneau/gitlab-ci-pipelines-exporter:latest \
+   pugovok/gitlab-ci-pipelines-exporter:latest \
    -config /etc/config.yml
 ```
 
@@ -92,7 +92,7 @@ Usage of .gitlab-ci-pipelines-exporter:
 If you want to make it run on [kubernetes](https://kubernetes.io/), there is a [helm chart](https://docs.helm.sh/) for that!
 
 ```
-~$ git clone git@github.com:mvisonneau/gitlab-ci-pipelines-exporter.git
+~$ git clone git@github.com:pugovok/gitlab-ci-pipelines-exporter.git
 ~$ cd gitlab-ci-pipelines-exporter/charts
 ~$ cat <<EOF > values.yml
 gitlab:
@@ -130,4 +130,4 @@ If you use docker, you can easily get started using :
 
 ## Contribute
 
-Contributions are more than welcome! Feel free to submit a [PR](https://github.com/mvisonneau/gitlab-ci-pipelines-exporter/pulls).
+Contributions are more than welcome! Feel free to submit a [PR](https://github.com/pugovok/gitlab-ci-pipelines-exporter/pulls).
