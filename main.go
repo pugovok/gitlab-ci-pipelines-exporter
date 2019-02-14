@@ -125,6 +125,7 @@ func main() {
 					}
 
 					if len(pipelines) == 0 {
+						time.Sleep(time.Duration(config.PollingIntervalSeconds) * time.Second)
 						continue
 					}
 
