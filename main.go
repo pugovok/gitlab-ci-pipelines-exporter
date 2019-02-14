@@ -119,21 +119,21 @@ func main() {
 
 			for {
 				pipelines, _, _ := gc.Pipelines.ListProjectPipelines(gp.ID, &gitlab.ListProjectPipelinesOptions{Ref: gitlab.String(p.Ref)})
-				if len(pipelines) > 0 &&
-					(lastPipeline == nil || lastPipeline.ID != pipelines[0].ID || lastPipeline.Status != pipelines[0].Status) {
+				if lastPipeline == nil || lastPipeline.ID != pipelines[0].ID || lastPipeline.Status != pipelines[0].Status {
 					if lastPipeline != nil {
 						runCount.WithLabelValues(p.Name, p.Ref).Inc()
 					}
+					if len(pipelines) > 0 {
+						lastPipeline, _, _ = gc.Pipelines.GetPipeline(gp.ID, pipelines[0].ID)
 
-					lastPipeline, _, _ = gc.Pipelines.GetPipeline(gp.ID, pipelines[0].ID)
+						lastRunDuration.WithLabelValues(p.Name, p.Ref).Set(float64(lastPipeline.Duration))
 
-					lastRunDuration.WithLabelValues(p.Name, p.Ref).Set(float64(lastPipeline.Duration))
-
-					for _, s := range []string{"success", "failed", "running"} {
-						if s == lastPipeline.Status {
-							status.WithLabelValues(p.Name, p.Ref, s).Set(1)
-						} else {
-							status.WithLabelValues(p.Name, p.Ref, s).Set(0)
+						for _, s := range []string{"success", "failed", "running"} {
+							if s == lastPipeline.Status {
+								status.WithLabelValues(p.Name, p.Ref, s).Set(1)
+							} else {
+								status.WithLabelValues(p.Name, p.Ref, s).Set(0)
+							}
 						}
 					}
 				}
